@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom|center"
+    android:background="@drawable/shape_setting"
+    tools:context=".fragment_setting">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_minus"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        <ImageButton
+            android:id="@+id/setting_and_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/vt_settings_infos"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="설정 및 개인정보"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        <ImageButton
+            android:id="@+id/review_analysis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/vt_info_analyze"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="내 활동 분석"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        <ImageButton
+            android:id="@+id/discoService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/vt_disco"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="내 활동 분석"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        <ImageButton
+            android:id="@+id/credit_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/vt_reward"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="리워드 관리"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+        <ImageButton
+            android:id="@+id/logout_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vt_logout"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="로그아웃"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp">
+        <ImageButton
+            android:id="@+id/delete_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@drawable/vt_delete"
+            android:background="@android:color/transparent"
+            android:scaleType="fitStart" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:layout_marginLeft="50dp"
+            android:text="회원탈퇴"/>
+    </FrameLayout>
+
+</LinearLayout>

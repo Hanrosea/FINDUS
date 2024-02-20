@@ -1,0 +1,21 @@
+<!-- shadow_shape.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow -->
+    <item>
+        <shape>
+            <solid android:color="#40000000" /> <!-- Adjust the alpha and color of the shadow -->
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+    <!-- Main Shape -->
+    <item
+        android:left="0dp"
+        android:top="0dp"
+        android:right="0dp"
+        android:bottom="2dp">
+        <shape>
+            <solid android:color="@color/white" />
+            <corners android:radius="8dp" />
+        </shape>
+    </item>
+</layer-list>

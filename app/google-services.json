@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "313522226250",
+    "project_id": "findus-f954a",
+    "storage_bucket": "findus-f954a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313522226250:android:99ecbc0e8bc5f5f1d092b3",
+        "android_client_info": {
+          "package_name": "com.find.findus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313522226250-a56n87q80r58bj6unk9dt0isupjqqqi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.find.findus",
+            "certificate_hash": "39498d0e246726295590208aef39c02b00c66576"
+          }
+        },
+        {
+          "client_id": "313522226250-3d4bk3fj7n1ohckgipkob04gfui7g3o5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD9QLgH7GBuv3G6vtzu4neQO5Y8OZL4gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313522226250-3d4bk3fj7n1ohckgipkob04gfui7g3o5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
