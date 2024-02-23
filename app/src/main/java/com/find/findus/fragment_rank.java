@@ -1,9 +1,11 @@
 package com.find.findus;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,10 +17,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class fragment_rank extends Fragment {
@@ -32,17 +34,17 @@ public class fragment_rank extends Fragment {
     }
 
     public class UserRank {
+        public String userProfile;
         public String userId;
         public String userName;
         public int totalLikes;
 
-        public UserRank(String userId, String userName, int totalLikes) {
+        public UserRank(String userProfile, String userId, String userName, int totalLikes) {
+            this.userProfile = userProfile;
             this.userId = userId;
             this.userName = userName;
             this.totalLikes = totalLikes;
         }
-
-        // Getter 메서드 생략
     }
 
     public static fragment_rank newInstance(String param1, String param2) {
@@ -70,7 +72,7 @@ public class fragment_rank extends Fragment {
         LinearLayout usersContainer = view.findViewById(R.id.userRankContainer);
 
         // Firebase 데이터베이스 참조
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users/user");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("user");
 
         // UserRank 객체를 담을 리스트
         List<UserRank> userRankList = new ArrayList<>();
@@ -81,20 +83,23 @@ public class fragment_rank extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userRankList.clear(); // 리스트 초기화
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String userProfile = snapshot.child("profileImageUrl").getValue(String.class);
                     String userId = snapshot.getKey();
                     String userName = snapshot.child("name").getValue(String.class);
                     int totalLikes = snapshot.child("totalLikes").getValue(Integer.class);
+                    Log.d("유저랭킹", userId + userName + totalLikes);
 
-                    userRankList.add(new UserRank(userId, userName, totalLikes));
+                    userRankList.add(new UserRank(userProfile, userId, userName, totalLikes));
                 }
 
                 // totalLikes를 기준으로 내림차순 정렬
                 Collections.sort(userRankList, (user1, user2) -> Integer.compare(user2.totalLikes, user1.totalLikes));
-
+                
                 usersContainer.removeAllViews();
                 for (int i = 0; i < userRankList.size(); i++) {
                     View userView = inflater.inflate(R.layout.rank_item, usersContainer, false);
 
+                    ImageView userProfileImageView = userView.findViewById(R.id.userProfile);
                     TextView rankingTextView = userView.findViewById(R.id.ranking);
                     TextView userNameTextView = userView.findViewById(R.id.userName);
                     TextView allLikesTextView = userView.findViewById(R.id.allLikes);
@@ -115,8 +120,17 @@ public class fragment_rank extends Fragment {
                         rankingTextView.setText(String.valueOf(i + 1));
                     }
 
+                    // 프로필 이미지 설정
+                    if (userRankList.get(i).userProfile != null && !userRankList.get(i).userProfile.isEmpty()) {
+                        Picasso.get().load(userRankList.get(i).userProfile).into(userProfileImageView);
+                    } else {
+                        userProfileImageView.setImageResource(R.drawable.app_icon);
+                    }
+
                     userNameTextView.setText(userRankList.get(i).userName);
                     allLikesTextView.setText(String.valueOf(userRankList.get(i).totalLikes));
+
+                    Log.d("반복확인", userRankList.get(i).userName);
 
                     usersContainer.addView(userView);
                 }

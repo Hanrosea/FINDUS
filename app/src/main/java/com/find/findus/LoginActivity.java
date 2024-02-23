@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -26,8 +27,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private DatabaseReference mDatabase;
+    private EditText edit_id, edit_pw;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,28 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         init();
+
+        Button make_account = findViewById(R.id.make_account);
+        make_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MakeAccActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // UI 컴포넌트 초기화
+        edit_id = findViewById(R.id.edit_id);
+        edit_pw = findViewById(R.id.edit_pw);
+        login = findViewById(R.id.login);
+
+        // 로그인 버튼 클릭 리스너 설정
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyUser();
+            }
+        });
     }
 
     private void init() {
@@ -101,7 +129,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUI(){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
 
+        finish();
     }
 
     private void signIn(){
@@ -131,16 +162,14 @@ public class LoginActivity extends AppCompatActivity {
                         userInfo.put("email", userEmail);
                         userInfo.put("profileImageUrl", profileImageUrl);
                         userInfo.put("totalLikes", totalLikes);
+                        userInfo.put("password", "");
 
                         // 데이터베이스에 사용자 정보 저장
                         saveUserInfoToDatabase(userInfo);
                     }
-
                     Toast.makeText(getApplicationContext(), "환영합니다", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    updateUI();
 
-                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG).show();
                 }
@@ -148,10 +177,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // mDatabase를 초기화하기 위해 이 메서드를 추가합니다.
     private void initDatabase() {
+        // mDatabase를 초기화하기 위해 이 메서드를 추가합니다.
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
+
     private void saveUserInfoToDatabase(Map<String, Object> userInfo) {
         // 데이터베이스에서 user 레퍼런스를 가져옴
         DatabaseReference userRef = mDatabase.child("Users").child("user");
@@ -168,5 +198,39 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void verifyUser() {
+        final String userId = edit_id.getText().toString().trim();
+        final String userPw = edit_pw.getText().toString().trim();
+
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child("user");
+
+        // 사용자 ID 존재 여부 확인
+        userRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // 사용자 ID가 존재할 경우, 비밀번호 확인
+                    String password = dataSnapshot.child("password").getValue(String.class);
+                    if (password != null && password.equals(userPw)) {
+                        // 비밀번호 일치
+                        updateUI();
+                    } else {
+                        // 비밀번호 불일치
+                        Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // 사용자 ID가 존재하지 않음
+                    Toast.makeText(LoginActivity.this, "존재하지 않는 사용자 ID입니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 데이터베이스 오류
+                Toast.makeText(LoginActivity.this, "데이터베이스 오류: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -1,16 +1,10 @@
 package com.find.findus;
 
-import android.Manifest;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,11 +14,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            android.Manifest.permission.READ_EXTERNAL_STORAGE
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
                     throw new IllegalArgumentException("Invalid position: " + position);
             }
         }).attach();
-
-        verifyStoragePermissions();
 
         viewPager.setCurrentItem(1, false);
     }
@@ -78,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static class MyFragmentAdapter extends FragmentStateAdapter {
-
         public MyFragmentAdapter(AppCompatActivity fragmentActivity) {
             super(fragmentActivity);
         }
@@ -100,32 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     return new fragment_mypage();
                 default:
                     throw new IllegalArgumentException("Invalid position: " + position);
-            }
-        }
-    }
-
-    public void verifyStoragePermissions() {
-        // Check if we have read permission
-        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    this,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission was granted, now you can access the storage
-            } else {
-                // Permission was denied, disable the functionality that depends on this permission.
             }
         }
     }

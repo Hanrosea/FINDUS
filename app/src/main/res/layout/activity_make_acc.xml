@@ -29,18 +29,32 @@
             android:gravity="center">
 
             <EditText
-                android:id="@+id/edit_id"
+                android:id="@+id/create_id"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="50dp"
                 android:hint="Id"
                 android:background="@drawable/shape_make_account"/>
             <EditText
-                android:id="@+id/edit_pw"
+                android:id="@+id/create_pw"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="5dp"
                 android:hint="Password"
+                android:background="@drawable/shape_make_account"/>
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:hint="이름을 입력하세요"
+                android:background="@drawable/shape_make_account"/>
+            <EditText
+                android:id="@+id/userEmail"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:hint="이메일을 입력하세요"
                 android:background="@drawable/shape_make_account"/>
 
             <LinearLayout
@@ -51,75 +65,29 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal" >
                 <Button
+                    android:id="@+id/checking_duplicate"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:background="@drawable/shape_make_account"/>
                 <TextView
+                    android:id="@+id/checking_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center"
-                    android:text="로그인 유지" />
+                    android:text="아이디 중복 확인"
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/login"
+                android:id="@+id/create_account"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:text="로그인"
+                android:text="계정 생성"
                 android:textColor="@color/white"
                 android:background="@drawable/shape_login_btn"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center" >
-                <Button
-                    android:id="@+id/make_account"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:stateListAnimator="@null"
-                    android:text="회원가입" />
-                <View
-                    android:layout_width="0.7dp"
-                    android:layout_height="30dp"
-                    android:background="@color/chacol" />
-                <Button
-                    android:id="@+id/find_id"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:stateListAnimator="@null"
-                    android:text="아이디 찾기"/>
-                <View
-                    android:layout_width="0.7dp"
-                    android:layout_height="30dp"
-                    android:background="@color/chacol" />
-                <Button
-                    android:id="@+id/find_pw"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:stateListAnimator="@null"
-                    android:text="비밀번호 찾기"/>
-            </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:text="구글과 함께 파인더스를!"
-            android:textColor="@color/black" />
-        <Button
-            android:id="@+id/signIn_btn"
-            android:layout_width="210dp"
-            android:layout_height="45dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/vt_google_login"/>
 
     </LinearLayout>
 
