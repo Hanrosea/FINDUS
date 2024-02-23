@@ -18,16 +18,16 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="5dp"
-                app:cardBackgroundColor="#40000000"
+                app:cardBackgroundColor="#00000000"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp">
                 <TextView
                     android:id="@+id/ranking"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/vt_gold_medal"/>
+                    android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -36,7 +36,6 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_gravity="center"
-                app:cardBackgroundColor="#40000000"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp">
                 <ImageView
@@ -50,7 +49,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/userName"
@@ -58,21 +57,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="-"/>
+                    android:text="-"
+                    android:textColor="@color/white"/>
                 <TextView
                     android:id="@+id/followers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="-"/>
+                    android:text="-"
+                    android:textColor="@color/white"/>
                 <TextView
                     android:id="@+id/allLikes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:text="-"/>
+                    android:text="-"
+                    android:textColor="@color/white"/>
             </LinearLayout>
 
         </LinearLayout>

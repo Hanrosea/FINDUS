@@ -29,6 +29,10 @@ public class MakeAccActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_acc);
 
+        // 상태바 색상 변경
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); // 상태바 글씨 색상을 어두운 색으로 변경 (흰색 배경에 맞춤)
+        getWindow().setStatusBarColor(Color.WHITE); // 상태바 배경을 흰색으로 변경
+
         // UI 컴포넌트 초기화
         createIdEditText = findViewById(R.id.create_id);
         createPwEditText = findViewById(R.id.create_pw);

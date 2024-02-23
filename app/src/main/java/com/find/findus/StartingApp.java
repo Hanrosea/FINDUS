@@ -1,8 +1,10 @@
 package com.find.findus;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,10 @@ public class StartingApp extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_starting_app);
+
+        // 상태바 색상 변경
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR); // 상태바 글씨 색상을 어두운 색으로 변경 (흰색 배경에 맞춤)
+        getWindow().setStatusBarColor(Color.WHITE); // 상태바 배경을 흰색으로 변경
 
         mAuth = FirebaseAuth.getInstance();
 
